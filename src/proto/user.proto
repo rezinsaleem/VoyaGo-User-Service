@@ -1,0 +1,35 @@
+syntax = "proto3";
+package user;
+
+service User {
+    rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse);
+    rpc SignupOtp(SignupOtpRequest) returns (SignupOtpResponse);
+    rpc ResendOtp(SignupOtpRequest) returns (SignupOtpResponse);
+}
+
+message RegisterUserRequest {
+    string name = 1;
+    string email = 2;
+    string phoneNumber = 3;
+    string password = 4;
+    string userImage = 5;
+    string otp = 6;
+}
+
+message RegisterUserResponse {
+    string message = 1;
+    string name = 2;
+    string token = 3;
+    string _id = 4;
+    string refreshToken = 5;
+    string image = 6;
+}
+
+message SignupOtpRequest {
+    string email = 1;
+    string name = 2;
+}
+
+message SignupOtpResponse {
+    string message = 1;
+}
