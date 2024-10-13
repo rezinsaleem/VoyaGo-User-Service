@@ -19,4 +19,18 @@ export default class LoginController {
       callback(null, { error: (error as Error).message });
     }
   };
+
+  googleLoginUser = async (
+    call: { request: { email: string; } },
+    callback: (error: any, response: any) => void
+  ) => {
+    const { email } = call.request;
+    try {
+      const response = await loginUseCase.googleLoginUser(email);
+      callback(null, response);
+    } catch (error) {
+      console.error('Login failed:', error);
+      callback(null, { error: (error as Error).message });
+    }
+  };
 }

@@ -6,6 +6,20 @@ service User {
     rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse);
     rpc SignupOtp(SignupOtpRequest) returns (SignupOtpResponse);
     rpc ResendOtp(SignupOtpRequest) returns (SignupOtpResponse);
+    rpc GoogleLoginUser(GoogleLoginUserRequest) returns (GoogleLoginUserResponse);
+}
+
+message GoogleLoginUserRequest {
+    string email = 1;
+}
+
+message GoogleLoginUserResponse {
+    string message = 1;
+    string name = 2;
+    string token = 3;
+    string _id = 4;
+    string refreshToken = 5;
+    string image = 6;
 }
 
 message LoginUserRequest {

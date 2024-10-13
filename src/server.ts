@@ -44,6 +44,7 @@ server.addService(grpcObject.user.User.service, {
   ResendOtp: registerController.resendOtp,
   RegisterUser: registerController.registerUser,
   LoginUser: loginController.loginUser,
+  GoogleLoginUser: loginController.googleLoginUser,
   
 });
 
