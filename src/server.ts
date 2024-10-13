@@ -4,12 +4,12 @@ import * as protoLoader from '@grpc/proto-loader';
 import 'dotenv/config';
 import connectDB from './config/mongo';
 
-// import LoginController from './controllers/loginController';
 import RegisterController from './controllers/registerController';
+import LoginController from './controllers/loginController';
 
 // import UserController from './controllers/userController';
 
-// const loginController = new LoginController();
+const loginController = new LoginController();
 const registerController = new RegisterController();
 // const adminController = new AdminController();
 // const userController = new UserController();
@@ -43,6 +43,7 @@ server.addService(grpcObject.user.User.service, {
   SignupOtp:registerController.signupOtp,
   ResendOtp: registerController.resendOtp,
   RegisterUser: registerController.registerUser,
+  LoginUser: loginController.loginUser,
   
 });
 
