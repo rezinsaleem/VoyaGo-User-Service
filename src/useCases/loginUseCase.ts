@@ -29,6 +29,8 @@ export default class LoginUseCase {
         _id: user._id,
         refreshToken,
         image: user.userImage,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
       };
     } catch (error) {
       return { message: (error as Error).message };
@@ -53,6 +55,8 @@ export default class LoginUseCase {
         _id: user._id,
         refreshToken,
         image: user.userImage,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
       };
     } catch (error) {
       return { message: (error as Error).message };

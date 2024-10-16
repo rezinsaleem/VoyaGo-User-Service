@@ -1,5 +1,5 @@
 import User from '../entities/user';
-import { RegisterUser, UserInterface } from '../utilities/interface';
+import { RegisterUser, UpdateUserRequest, UserInterface } from '../utilities/interface';
 
 export default class UserRepository {
   
@@ -31,4 +31,39 @@ export default class UserRepository {
       return { message: (error as Error).message }; 
     }
   };
+
+  findById = async (id: string) => {
+    try {
+      const user = await User.findById(id).select(
+        '_id name email phoneNumber userImage password'
+      ).lean();
+      return user;
+    } catch (error) {
+      console.error('Error finding service: ', (error as Error).message);
+      throw new Error('Service search failed');
+    }
+  };
+
+  findByIdAndUpdate = async (
+    id: string,
+    updates: Partial<UpdateUserRequest> ,
+  ): Promise<{ message: string }> => {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        id,
+        updates,
+        { new: true, runValidators: true }
+      );
+      if (!updatedUser) {
+        console.log('User not found.');
+        return { message: 'User not found.' };
+      }
+      console.log('User updated successfully.');
+      return { message: 'UserUpdated' };
+    } catch (error) {
+      console.error('Error updating user:', (error as Error).message);
+      return { message: (error as Error).message };
+    }
+  };
+  
 }

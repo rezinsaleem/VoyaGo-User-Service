@@ -4,7 +4,7 @@ export interface UserInterface extends Document {
   _id: ObjectId;
   name: string;
   email: string;
-  mobile: number;
+  phoneNumber: number;
   password: string;
   userImage: string;
   accountStatus: string;
@@ -18,4 +18,12 @@ export interface RegisterUser {
   phoneNumber: string;
   password: string;
   userImage: string;
+}
+
+export interface UpdateUserRequest {
+  id: string;
+  name: string;
+  phoneNumber: number;
+  userImage: File | null;
+  password: string | null;
 }

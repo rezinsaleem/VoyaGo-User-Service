@@ -77,6 +77,8 @@ export default class RegisterUseCase {
           _id: newUser._id,
           refreshToken,
           image: newUser.userImage,
+          email: newUser.email,
+          phoneNumber: newUser.phoneNumber,
         };
       } else {
         console.error("Error saving user:", response);
