@@ -45,6 +45,7 @@ server.addService(grpcObject.user.User.service, {
   SignupOtp:registerController.signupOtp,
   ResendOtp: registerController.resendOtp,
   RegisterUser: registerController.registerUser,
+  IsBlocked: userController.isBlocked,
 
   LoginUser: loginController.loginUser,
   GoogleLoginUser: loginController.googleLoginUser,
@@ -56,6 +57,8 @@ server.addService(grpcObject.user.User.service, {
   ChangePassword: userController.changePassword,
 
   AdminLogin: adminController.adminLogin,
+  GetUsers: userController.getUsers,
+  BlockUser: userController.blockUser,
   
 });
 

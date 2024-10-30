@@ -54,4 +54,57 @@ export default class UserUseCase {
     }
   };
 
+  getUsers = async () => {
+    try {
+      const users = await userRepository.findAll();
+      if (users && users.length > 0) {
+        return { users };
+      } else {
+        return { message: 'No Users Found' };
+      }
+    } catch (error) {
+      return { message: (error as Error).message };
+    }
+  };
+
+  blockUser = async (id: string, accountStatus: string) => {
+    try {
+      const user = (await userRepository.findById(id)) as UserInterface;
+      if (user) {
+        const updates: { [key: string]: any } = {};
+        if (accountStatus === 'Blocked') {
+          updates.accountStatus = 'Blocked';
+        }
+        if (accountStatus === 'UnBlocked') {
+          updates.accountStatus = 'UnBlocked';
+        }
+        const response = await userRepository.findByIdAndUpdate(id, updates);
+        if (response.message === 'UserUpdated') {
+          return { message: 'success' };
+        } else {
+          return { message: 'Request Failed' };
+        }
+      }
+      return { message: 'Expert does not exist' };
+    } catch (error) {
+      return { message: (error as Error).message };
+    }
+  };
+
+  isBlocked = async (id: string) => {
+    try {
+      const user = await userRepository.find(id);
+      if (user?.accountStatus === 'Blocked') {
+        return { message: 'Blocked' };
+      } else if (user?.accountStatus === 'UnBlocked') {
+        return { message: 'UnBlocked' };
+      } else {
+        return { message: 'No User Found' };
+      }
+    } catch (error) {
+      return { message: (error as Error).message };
+    }
+  };
+
+
 }

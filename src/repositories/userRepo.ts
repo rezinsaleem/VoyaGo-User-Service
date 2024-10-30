@@ -65,5 +65,25 @@ export default class UserRepository {
       return { message: (error as Error).message };
     }
   };
+
+  findAll = async () => {
+    try {
+      const users = await User.find()
+      return users;
+    } catch (error) {
+      console.error('Error finding User: ', (error as Error).message);
+      throw new Error('User search failed');
+    }
+  }; 
+
+  find = async (id: string) => {
+    try {
+      const user = await User.findById(id)
+      return user;
+    } catch (error) {
+      console.error('Error finding service: ', (error as Error).message);
+      throw new Error('Service search failed');
+    }
+  };
   
 }

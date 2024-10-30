@@ -12,9 +12,39 @@ service User {
     rpc OtpVerify(OtpVerifyRequest) returns (SignupOtpResponse);
     rpc ChangePassword(ChangePasswordRequest) returns (SignupOtpResponse);
     rpc UpdatePassword(LoginUserRequest) returns (SignupOtpResponse);
+    rpc IsBlocked(GetUserRequest) returns (SignupOtpResponse);
 
     rpc AdminLogin(LoginUserRequest) returns (LoginAdminRespone);
+    rpc GetUsers(Empty) returns (GetUsersResponse);
+    rpc BlockUser(BlockUserRequest) returns (SignupOtpResponse);
 }
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message BlockUserRequest {
+  string id = 1;
+  string accountStatus = 2;
+}
+
+message Empty {}
+
+message UserMessage {
+  string _id = 1;                 
+  string name = 2;                
+  string email = 3;               
+  int64 phoneNumber = 4;                       
+  string userImage = 5;         
+  string accountStatus = 6;      
+  string createdAt = 7;        
+  string updatedAt = 8;  
+}
+
+message GetUsersResponse {
+  repeated UserMessage users = 1;
+}
+
 
 message OtpVerifyRequest {
   string email = 1;
