@@ -8,10 +8,17 @@ service User {
     rpc ResendOtp(SignupOtpRequest) returns (SignupOtpResponse);
     rpc GoogleLoginUser(GoogleLoginUserRequest) returns (GoogleLoginUserResponse);
     rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
-    
-  rpc ChangePassword(ChangePasswordRequest) returns (SignupOtpResponse);
+    rpc ForgotPassOtp(GoogleLoginUserRequest) returns (SignupOtpResponse);
+    rpc OtpVerify(OtpVerifyRequest) returns (SignupOtpResponse);
+    rpc ChangePassword(ChangePasswordRequest) returns (SignupOtpResponse);
+    rpc UpdatePassword(LoginUserRequest) returns (SignupOtpResponse);
 
     rpc AdminLogin(LoginUserRequest) returns (LoginAdminRespone);
+}
+
+message OtpVerifyRequest {
+  string email = 1;
+  string otp = 2;
 }
 
 message ChangePasswordRequest {

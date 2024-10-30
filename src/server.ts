@@ -48,6 +48,9 @@ server.addService(grpcObject.user.User.service, {
 
   LoginUser: loginController.loginUser,
   GoogleLoginUser: loginController.googleLoginUser,
+  ForgotPassOtp: loginController.forgotPassOtp,
+  OtpVerify: loginController.otpVerify,
+  UpdatePassword: loginController.updatePassword,
    
   UpdateUser: userController.updateUser,
   ChangePassword: userController.changePassword,
