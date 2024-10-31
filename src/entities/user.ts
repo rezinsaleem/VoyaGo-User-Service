@@ -26,6 +26,15 @@ const UserSchema: Schema = new Schema(
       type: String,
       default: 'UnBlocked',
     },
+    isVerified: {
+      type: String,
+      default: 'false',
+    },
+    verificationDetails: {
+      govIdType: { type: String },
+      govIdNumber: { type: String },
+      document: { type: String },
+    },
   },
   {
     timestamps: true,

@@ -34,9 +34,7 @@ export default class UserRepository {
 
   findById = async (id: string) => {
     try {
-      const user = await User.findById(id).select(
-        '_id name email phoneNumber userImage password'
-      ).lean();
+      const user = await User.findById(id)
       return user;
     } catch (error) {
       console.error('Error finding service: ', (error as Error).message);

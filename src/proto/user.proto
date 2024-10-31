@@ -13,10 +13,45 @@ service User {
     rpc ChangePassword(ChangePasswordRequest) returns (SignupOtpResponse);
     rpc UpdatePassword(LoginUserRequest) returns (SignupOtpResponse);
     rpc IsBlocked(GetUserRequest) returns (SignupOtpResponse);
+    rpc VerifyUser(VerifyUserRequest) returns (VerifyUserResponse);
 
     rpc AdminLogin(LoginUserRequest) returns (LoginAdminRespone);
-    rpc GetUsers(Empty) returns (GetUsersResponse);
     rpc BlockUser(BlockUserRequest) returns (SignupOtpResponse);
+    rpc GetUsers(Empty) returns (GetUsersResponse);
+    rpc GetUser(GetUserRequest) returns (GetUserResponse);
+    rpc UserVerification(UserVerificationRequest) returns (SignupOtpResponse);
+}
+
+message UserVerificationRequest {
+  string id = 1;
+  string action = 2;
+  string reason = 3;
+}
+  
+  message GetUserResponse {
+    string message = 1;                
+    string _id = 2;                     
+    string name = 3;                    
+    string email = 4;                   
+    int64 phoneNumber = 5;                  
+    string userImage = 6;             
+    string accountStatus = 7;           
+    string isVerified = 8;              
+    VerificationDetails verificationDetails = 9;  
+    string createdAt = 10;              
+    string updatedAt = 11;              
+  }
+
+message VerifyUserRequest {
+  string id = 1;
+  string govIdType = 2;
+  string govIdNumber = 3;
+  string verifyDocument = 4;
+}
+
+message VerifyUserResponse {
+  string message = 1;
+  string isVerified = 2;
 }
 
 message GetUserRequest {
@@ -30,15 +65,23 @@ message BlockUserRequest {
 
 message Empty {}
 
+message VerificationDetails {
+  string govIdType = 1;          
+  string govIdNumber = 2;        
+  string document = 3;            
+}
+
 message UserMessage {
   string _id = 1;                 
   string name = 2;                
   string email = 3;               
   int64 phoneNumber = 4;                       
   string userImage = 5;         
-  string accountStatus = 6;      
-  string createdAt = 7;        
-  string updatedAt = 8;  
+  string accountStatus = 6; 
+  string isVerified = 7;          
+  VerificationDetails verificationDetails = 8;      
+  string createdAt = 9;        
+  string updatedAt = 10;  
 }
 
 message GetUsersResponse {

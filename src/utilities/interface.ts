@@ -1,5 +1,11 @@
 import { Document, ObjectId } from 'mongoose';
 
+export interface VerificationDetails {
+  govIdType?: string;
+  govIdNumber?: string;
+  document?: string;
+}
+
 export interface UserInterface extends Document {
   _id: ObjectId;
   name: string;
@@ -8,8 +14,19 @@ export interface UserInterface extends Document {
   password: string;
   userImage: string;
   accountStatus: string;
+  isVerified: string;
+  verificationDetails?: VerificationDetails;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface VerifyUserRequest {
+  id: string;
+  verificationDetails: {
+    govIdType: string;
+    govIdNumber: string;
+    document: string;
+  };
 }
 
 export interface RegisterUser {

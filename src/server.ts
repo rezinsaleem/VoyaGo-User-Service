@@ -58,7 +58,10 @@ server.addService(grpcObject.user.User.service, {
 
   AdminLogin: adminController.adminLogin,
   GetUsers: userController.getUsers,
+  GetUser: userController.getUser,
   BlockUser: userController.blockUser,
+  VerifyUser: userController.verifyUser,
+  UserVerification: userController.userVerification,
   
 });
 

@@ -105,4 +105,67 @@ export default class UserController {
     }
   };
 
+  verifyUser = async (
+    call: {
+      request: any;
+    },
+    callback: (error: any, response: any) => void
+  ) => {
+    const { id, govIdType, govIdNumber, verifyDocument } = call.request;
+    const updates = {
+      isVerified:'pending',
+      verificationDetails: {
+        govIdType,
+        govIdNumber,
+        document: verifyDocument,
+      },
+    };
+    try {
+      const response = await userUseCase.verifyUser(id, updates);
+      callback(null, response);
+    } catch (error) {
+      console.error('Update user failed:', error);
+      callback(null, { error: (error as Error).message });
+    }
+  };
+
+  getUser = async (
+    call: {
+      request: {
+        id: string;
+      };
+    },
+    callback: (error: any, response: any) => void
+  ) => {
+    try {
+      const { id } = call.request;
+      const user = await userUseCase.getUser(id);
+      callback(null, user);
+    } catch (error) {
+      console.error('Error fetching User:', error);
+      callback(null, { error: (error as Error).message });
+    }
+  };
+
+  userVerification  = async (
+    call: {
+      request: {
+        id: string;
+        action: string;
+        reason?: string;
+      };
+    },
+    callback: (error: any, response: any) => void
+  ) => {
+    try {
+      const { id, action, reason } = call.request;
+      const response = await userUseCase.userVerification(id, action, reason?reason:'');
+      callback(null, response);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+      callback(null, { error: (error as Error).message });
+    }
+  };
+
+
 }
