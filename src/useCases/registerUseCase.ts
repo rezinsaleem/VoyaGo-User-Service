@@ -67,8 +67,8 @@ export default class RegisterUseCase {
       
       if (response.message === 'UserCreated') {
         const newUser = (await userRepository.findByEmail(email)) as UserInterface;
-        const token = await auth.createToken(newUser._id.toString(), '15m');
-        const refreshToken = await auth.createToken(newUser._id.toString(), '7d');
+        const token = await auth.createToken(newUser._id.toString(),'user', '15m');
+        const refreshToken = await auth.createToken(newUser._id.toString(),'user', '7d');
   
         return {
           message: 'Success',
@@ -79,6 +79,7 @@ export default class RegisterUseCase {
           image: newUser.userImage,
           email: newUser.email,
           phoneNumber: newUser.phoneNumber,
+          isVerified: newUser.isVerified
         };
       } else {
         console.error("Error saving user:", response);

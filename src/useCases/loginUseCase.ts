@@ -23,8 +23,8 @@ export default class LoginUseCase {
       if (user.accountStatus === 'Blocked') {
         return { message: 'blocked' };
       }
-      const token = await auth.createToken(user._id.toString(), '15m');
-      const refreshToken = await auth.createToken(user._id.toString(), '7d');
+      const token = await auth.createToken(user._id.toString(), 'user', '15m');
+      const refreshToken = await auth.createToken(user._id.toString(),'user', '7d');
       return {
         message: 'Success',
         name: user.name,
@@ -34,6 +34,7 @@ export default class LoginUseCase {
         image: user.userImage,
         email: user.email,
         phoneNumber: user.phoneNumber,
+        isVerified: user.isVerified
       };
     } catch (error) {
       return { message: (error as Error).message };
@@ -49,8 +50,8 @@ export default class LoginUseCase {
       if (user.accountStatus === 'Blocked') {
         return { message: 'blocked' };
       }
-      const token = await auth.createToken(user._id.toString(), '15m');
-      const refreshToken = await auth.createToken(user._id.toString(), '7d');
+      const token = await auth.createToken(user._id.toString(),'user', '15m');
+      const refreshToken = await auth.createToken(user._id.toString(),'user', '7d');
       return {
         message: 'Success',
         name: user.name,
@@ -60,6 +61,7 @@ export default class LoginUseCase {
         image: user.userImage,
         email: user.email,
         phoneNumber: user.phoneNumber,
+        isVerified: user.isVerified
       };
     } catch (error) {
       return { message: (error as Error).message };

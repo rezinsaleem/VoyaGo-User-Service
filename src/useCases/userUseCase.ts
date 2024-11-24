@@ -163,7 +163,7 @@ export default class UserUseCase {
         updates.isVerified = 'true';
         const response = await userRepository.findByIdAndUpdate(id, updates);
         if (response.message === 'UserUpdated') {
-          console.log('Expert Verified Successfully');
+          console.log('User Verified Successfully');
           const subject: string = 'Verification Request';
           const text: string =
             `Hello ${user.name},\n\n` +
