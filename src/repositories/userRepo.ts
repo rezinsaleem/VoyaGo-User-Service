@@ -37,8 +37,8 @@ export default class UserRepository {
       const user = await User.findById(id)
       return user;
     } catch (error) {
-      console.error('Error finding service: ', (error as Error).message);
-      throw new Error('Service search failed');
+      console.error('Error finding User: ', (error as Error).message);
+      throw new Error('User search failed');
     }
   };
 
