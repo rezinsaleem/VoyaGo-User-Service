@@ -167,5 +167,23 @@ export default class UserController {
     }
   };
 
+  getUsersByRides = async (
+    call: {
+      request: {
+        riderIds: string[];
+      };
+    },
+    callback: (error: any, response: any) => void
+  ) => {
+    try {
+      const riderIds = call.request.riderIds;
+      const users = await userUseCase.getUsersByRides(riderIds);
+      console.log("laast", users)
+      callback(null, users);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+      callback(null, { error: (error as Error).message });
+    }
+  };
 
 }

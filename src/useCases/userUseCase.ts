@@ -201,5 +201,17 @@ export default class UserUseCase {
     }
   };
 
+  getUsersByRides = async (riderIds: string[]) => {
+    try {
+      const users = await userRepository.findRider(riderIds);
+      if (users && users.length > 0) {
+        return { users };
+      } else {
+        return { message: 'No Riders Found' };
+      }
+    } catch (error) {
+      return { message: (error as Error).message };
+    }
+  };
 
 }
